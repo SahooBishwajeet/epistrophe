@@ -1,14 +1,31 @@
-import { useState } from 'react'
+import { faker } from '@faker-js/faker';
+import RestartButton from './components/RestartButton';
+
+const words = faker.word.words(10);
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div className='text-8xl text-amber-400'>
-        Epistrophe
-      </div>
+      <CountDownTimer seconds={60} />
+      <GeneratedWords words={words} />
+      <RestartButton onRestart={() => {}} className={"mx-auto mt-10 text-slate-500"}/>
     </>
+  );
+}
+
+const GeneratedWords = ({ words }: { words: string[] }) => {
+  return (
+    <div className='text-4xl text-center text-slate-500'>
+      {words}
+    </div>
+  )
+}
+
+const CountDownTimer = ({ seconds }: { seconds: number }) => {
+  return (
+    <h2 className='font-medium text-amber-400'>
+      Time Left : {seconds}
+    </h2>
   )
 }
 
