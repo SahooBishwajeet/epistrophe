@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { numberToPercent } from '../utils/helpers';
 
 const Results = ({
   errors,
@@ -36,7 +37,7 @@ const Results = ({
         transition={{ ...transition, delay: 0.5 }}
       >
 
-        Accuracy : {accuracyPercent}
+        Accuracy : {numberToPercent(accuracyPercent)}
 
       </motion.li>
 
