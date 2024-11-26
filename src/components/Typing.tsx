@@ -1,3 +1,5 @@
+import CaretAnim from "./CaretAnim";
+
 const Typing = ({
   userInput,
   className,
@@ -13,6 +15,7 @@ const Typing = ({
       {typedChars.map((char, index) => {
         return <Character key={`${char}_${index}`} char={char} />
       })}
+    <CaretAnim />
     </div>
   )
 };
