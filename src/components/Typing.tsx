@@ -4,7 +4,7 @@ import CaretAnim from "./CaretAnim";
 const Typing = ({
   userInput,
   words,
-  className,
+  className = "",
 }: {
   userInput: string,
   words: string,
@@ -29,9 +29,9 @@ const Character = ({ actual, expected }: { actual: string, expected: string }) =
 
   return <span className={
     cn({
-      "text-red-400/50": !isCorrect && isSpace,
       "text-red-400": !isCorrect && !isSpace,
       "text-amber-400": isCorrect && !isSpace,
+      "text-red-400/50": !isCorrect && isSpace,
     })
   }>
     {expected}
