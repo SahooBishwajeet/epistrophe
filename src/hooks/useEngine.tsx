@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { countErrors } from "../utils/helpers";
+import { calculateWPM, countErrors } from "../utils/helpers";
 import useCountDown from "./useCountDown";
 import useTypings from "./useTypings";
 import useWords from "./useWords";
@@ -57,7 +57,9 @@ const useEngine = () => {
     clearTyped();
   }, [clearTyped, resetTotalTyped, resetCountDown, updateWords]);
 
-  return { state, words, timeLeft, typed, restart, errors, typedTotal };
+  const wpm = calculateWPM(COUNTDOWN, timeLeft, typedTotal, errors);
+
+  return { state, words, timeLeft, typed, restart, errors, typedTotal, wpm };
 };
 
 export default useEngine;

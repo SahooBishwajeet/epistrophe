@@ -6,12 +6,15 @@ import useEngine from './hooks/useEngine';
 import { calculateAccuracy } from './utils/helpers';
 
 function App() {
-  const { state, words, timeLeft, typed, restart, errors, typedTotal } = useEngine();
+  const { state, words, timeLeft, typed, restart, errors, typedTotal, wpm } = useEngine();
 
   return (
     <>
 
-      <CountDownTimer seconds={timeLeft} />
+      <CountDownWPMContainer>
+        <CountDownTimer seconds={timeLeft} />
+        <WPM wpm={wpm} />
+      </CountDownWPMContainer>
 
       <WordsConatiner>
         <GeneratedWords words={words} />
@@ -28,7 +31,7 @@ function App() {
 
 const WordsConatiner = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='relative max-w-xl mt-3 text-3xl leading-relaxed break-all'>
+    <div className='relative max-w-2xl mt-3 text-3xl leading-relaxed break-all'>
       {children}
     </div>
   )
@@ -39,6 +42,22 @@ const CountDownTimer = ({ seconds }: { seconds: number }) => {
     <h2 className='font-medium text-amber-400'>
       Time Left : {seconds}
     </h2>
+  )
+}
+
+const WPM = ({ wpm }: { wpm: number }) => {
+  return (
+    <h2 className='font-medium text-amber-400'>
+      WPM: {wpm}
+    </h2>
+  )
+}
+
+const CountDownWPMContainer = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className='flex justify-between items-center w-full'>
+      {children}
+    </div>
   )
 }
 

@@ -30,3 +30,10 @@ export const isTypingAllowed = (key: string) => {
     key === "Backspace"
   );
 };
+
+export const calculateWPM = (totalTime: number, timeLeft: number, typedTotal: number, errors: number) => {
+  const minutes = (totalTime - timeLeft) / 60;
+  const correctChars = typedTotal - errors;
+  const wpm = correctChars / 5 / minutes;
+  return isNaN(wpm) || wpm === Infinity ? 0 : Math.round(wpm);
+};
