@@ -1,27 +1,22 @@
 import { faker } from '@faker-js/faker';
-import { useState } from 'react';
 import RestartButton from './components/RestartButton';
 import Results from './components/Results';
 import Typing from './components/Typing';
+import useEngine from './hooks/useEngine';
 
 const words = faker.word.words(10);
 
 function App() {
-  const [words, setWords] = useState(faker.word.words(10));
-
-  const handleRestart = () => {
-    const newWords = faker.word.words(10);
-    setWords(newWords);
-  }
+  const { state, words, timeLeft, typed } = useEngine();
 
   return (
     <>
-      <CountDownTimer seconds={60} />
+      <CountDownTimer seconds={timeLeft} />
       <WordsConatiner>
         <GeneratedWords words={words} />
-        <Typing userInput={words} className={"absolute inset-0"} />
+        <Typing userInput={typed} className={"absolute inset-0"} />
       </WordsConatiner>
-      <RestartButton onRestart={handleRestart} className={"mx-auto mt-10 text-slate-500"} />
+      <RestartButton onRestart={() => { }} className={"mx-auto mt-10 text-slate-500"} />
       <Results errors={5} accuracyPercent={90} total={100} className={"mx-auto mt-10"} />
     </>
   );
