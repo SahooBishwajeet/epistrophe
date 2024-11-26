@@ -1,10 +1,13 @@
+import cn from 'classnames';
 import CaretAnim from "./CaretAnim";
 
 const Typing = ({
   userInput,
+  words,
   className,
 }: {
   userInput: string,
+  words: string,
   className?: string
   }) => {
 
@@ -13,15 +16,26 @@ const Typing = ({
   return (
     <div className={className}>
       {typedChars.map((char, index) => {
-        return <Character key={`${char}_${index}`} char={char} />
+        return <Character key={`${char}_${index}`} actual={char} expected={words[index]} />
       })}
     <CaretAnim />
     </div>
   )
 };
 
-const Character = ({ char }: { char: string }) => {
-  return <span className="text-amber-400">{char}</span>
+const Character = ({ actual, expected }: { actual: string, expected: string }) => {
+  const isCorrect = actual === expected;
+  const isSpace = expected === " ";
+
+  return <span className={
+    cn({
+      "text-red-400/50": !isCorrect && isSpace,
+      "text-red-400": !isCorrect && !isSpace,
+      "text-amber-400": isCorrect && !isSpace,
+    })
+  }>
+    {expected}
+  </span>
 };
 
 
