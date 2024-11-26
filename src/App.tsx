@@ -3,21 +3,22 @@ import RestartButton from './components/RestartButton';
 import Results from './components/Results';
 import Typing from './components/Typing';
 import useEngine from './hooks/useEngine';
+import { calculateAccuracy } from './utils/helpers';
 
 const words = faker.word.words(10);
 
 function App() {
-  const { state, words, timeLeft, typed } = useEngine();
+  const { state, words, timeLeft, typed, restart, errors, typedTotal } = useEngine();
 
   return (
     <>
       <CountDownTimer seconds={timeLeft} />
       <WordsConatiner>
         <GeneratedWords words={words} />
-        <Typing userInput={typed} className={"absolute inset-0"} />
+        <Typing words={words} userInput={typed} className={"absolute inset-0"} />
       </WordsConatiner>
-      <RestartButton onRestart={() => { }} className={"mx-auto mt-10 text-slate-500"} />
-      <Results errors={5} accuracyPercent={90} total={100} className={"mx-auto mt-10"} />
+      <RestartButton onRestart={restart} className={"mx-auto mt-10 text-slate-500"} />
+      <Results state={state} errors={errors} accuracyPercent={calculateAccuracy(typedTotal, errors)} total={typedTotal} className={"mx-auto mt-10"} />
     </>
   );
 }

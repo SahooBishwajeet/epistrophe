@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
+import { State } from '../hooks/useEngine';
 import { numberToPercent } from '../utils/helpers';
 
 const Results = ({
+  state,
   errors,
   accuracyPercent,
   total,
   className,
 }: {
+    state: State,
     errors: number,
     accuracyPercent: number,
     total: number,
@@ -16,6 +19,8 @@ const Results = ({
   const initial = { opacity: 0 }
   const animate = { opacity: 1 }
   const transition = { duration: 1 }
+
+  if (state !== "finished") return null
 
   return (
     <motion.ul
