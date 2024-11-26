@@ -1,13 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-
-const isTypingAllowed = (key: string) => {
-  return (
-    key.startsWith("Key") ||
-    key.startsWith("Digit") ||
-    key === "Space" ||
-    key === "Backspace"
-  );
-};
+import { isTypingAllowed } from "../utils/helpers";
 
 const useTypings = (enabled: boolean) => {
   const [cursor, setCursor] = useState(0);

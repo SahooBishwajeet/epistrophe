@@ -9,7 +9,7 @@ const useWords = (count: number) => {
   const [words, setWords] = useState<string>(generateWords(count));
 
   const updateWords = useCallback(() => {
-    setWords
+    setWords(generateWords(count));
   }, [count]);
 
   return { words, updateWords };

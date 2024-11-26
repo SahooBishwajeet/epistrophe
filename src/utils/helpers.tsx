@@ -21,3 +21,12 @@ export const calculateAccuracy = (total: number, errors: number) => {
 
   return ((total - errors) / total) * 100;
 };
+
+const isTypingAllowed = (key: string) => {
+  return (
+    key.startsWith("Key") ||
+    key.startsWith("Digit") ||
+    key === "Space" ||
+    key === "Backspace"
+  );
+};
